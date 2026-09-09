@@ -73,5 +73,5 @@ src/main/java/com/example/estoqueproduto
 
 ## Autor
 
-João Pedro Machado
-Giovanna Aparecida
+- João Pedro Machado
+- Giovanna Aparecida
