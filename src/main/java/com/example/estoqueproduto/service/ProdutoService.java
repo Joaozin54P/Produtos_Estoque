@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.estoqueproduto.model.Produto;
 import com.example.estoqueproduto.repository.ProdutoRepository;
@@ -27,8 +28,12 @@ public class ProdutoService {
                 .orElseThrow(() -> new RuntimeException("Produto nao encontrado"));
     }
 
+    // precisa estar dentro de uma transacao para o lock pessimista
+    // ser mantido ate o final da operacao
+    @Transactional
     public Produto venderProduto(Long id, Integer quantidade) {
-        Produto produto = buscarPorId(id);
+        Produto produto = produtoRepository.buscarComLockParaVenda(id)
+                .orElseThrow(() -> new RuntimeException("Produto nao encontrado"));
 
         if (produto.getQuantidade() < quantidade) {
             throw new RuntimeException("Estoque insuficiente para realizar a venda");
