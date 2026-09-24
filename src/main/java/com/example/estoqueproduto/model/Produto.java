@@ -1,5 +1,6 @@
 package com.example.estoqueproduto.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,6 +16,11 @@ public class Produto {
     private String nome;
 
     private Integer quantidade;
+
+    // id do produto no ProdutoCrudRabbitmq. O id acima e gerado pelo banco do
+    // Estoque, entao este campo e o elo entre os dois projetos nas mensagens
+    @Column(unique = true)
+    private Long produtoId;
 
     public Produto() {
     }
@@ -38,6 +44,14 @@ public class Produto {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public Long getProdutoId() {
+        return produtoId;
+    }
+
+    public void setProdutoId(Long produtoId) {
+        this.produtoId = produtoId;
     }
 
     public Integer getQuantidade() {

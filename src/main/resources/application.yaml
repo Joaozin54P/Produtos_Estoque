@@ -16,3 +16,11 @@ spring:
   h2:
     console:
       enabled: true
+  rabbitmq:
+    host: jackal.rmq.cloudamqp.com
+    port: 5671
+    username: gqkaxsna
+    password: A9kXlajE8sVzMwlOn92cPVb3AsZcNFMm
+    virtual-host: gqkaxsna
+    ssl:
+      enabled: true

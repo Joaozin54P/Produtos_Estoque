@@ -13,6 +13,9 @@ import com.example.estoqueproduto.model.Produto;
 
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
+    // busca pelo id do produto no ProdutoCrudRabbitmq
+    Optional<Produto> findByProdutoId(Long produtoId);
+
     // busca o produto travando a linha no banco ate a transacao terminar,
     // assim duas vendas do mesmo produto ao mesmo tempo nao conseguem
     // ler a mesma quantidade e furar o estoque
